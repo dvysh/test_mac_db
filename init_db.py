@@ -2,6 +2,8 @@
 
 import os
 import sys
+import sqlalchemy
+import psycopg2
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -47,7 +49,8 @@ for line in lines:
     try:
         session.commit()
 #    except sqlalchemy.exc.IntegrityError as err:
-#    except psycopg2.IntegrityError as err:
-    except:
-#        print(err)
-        print("Key (mac)=", fmac, "already exists.")
+    except psycopg2.IntegrityError or sqlalchemy.exc.IntegrityError as err:
+#    except IntegrityError as err:
+#    except:
+        print("Error ISSSS", err)
+#        print("Key (mac)=", fmac, "already exists.")
