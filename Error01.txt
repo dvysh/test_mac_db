@@ -1,0 +1,62 @@
+# test_mac_db
+
+root@rixtestelk02:~/python# ./init_db.py
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/base.py", line 1182, in _execute_context
+    context)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.IntegrityError: duplicate key value violates unique constraint "macaddress_mac_key"
+DETAIL:  Key (mac)=(000420f3cf94) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "./init_db.py", line 48, in <module>
+    session.commit()
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/session.py", line 921, in commit
+    self.transaction.commit()
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/session.py", line 461, in commit
+    self._prepare_impl()
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/session.py", line 441, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/session.py", line 2192, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/session.py", line 2312, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/util/langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/util/compat.py", line 187, in reraise
+    raise value
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/session.py", line 2276, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/unitofwork.py", line 389, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/unitofwork.py", line 548, in execute
+    uow
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/persistence.py", line 181, in save_obj
+    mapper, table, insert)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/orm/persistence.py", line 835, in _emit_insert_statements
+    execute(statement, params)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/sql/elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/base.py", line 1189, in _execute_context
+    context)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/util/compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/util/compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/base.py", line 1182, in _execute_context
+    context)
+  File "/usr/local/lib/python3.5/dist-packages/sqlalchemy/engine/default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.IntegrityError) duplicate key value violates unique constraint "macaddress_mac_key"
+DETAIL:  Key (mac)=(000420f3cf94) already exists.
+ [SQL: 'INSERT INTO macaddress (mac, account, status, fullname, "desc", alive) VALUES (%(mac)s, %(account)s, %(status)s, %(fullname)s, %(desc)s, %(alive)s) RETURNING macaddress.id'] [parameters: {'mac': '000420f3cf94', 'status': 'allowed', 'fullname': 'RIX MIS WiF MAC', 'desc': 'HarmonyHub 6th\n', 'alive': None, 'account': 'rixmiswifimac'}]
