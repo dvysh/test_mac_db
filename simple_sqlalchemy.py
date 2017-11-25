@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
 from flask import Flask
-#from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
 
 import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-#from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -30,7 +28,6 @@ engine = create_engine('postgresql://test123:p0o9i8u7@192.168.248.189/ddtest', e
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-# Define a table, then pass in the database records
 class UserTable(Table):
     mac = Col('Mac address')
     account = Col('Account')
@@ -38,7 +35,6 @@ class UserTable(Table):
     fullname = Col('Full Name')
     desc = Col('Description')
 
-#users = Macaddress.query.all()
 users = session.query(Macaddress).all()
 
 @app.route('/')
